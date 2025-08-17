@@ -1,3 +1,4 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import {
   Routes,
@@ -30,25 +31,25 @@ const Layout = () => {
 
   return (
     <>
-      <h1>React Router</h1>
-
-      <nav
-        style={{
-          borderBottom: "solid 1px",
-          paddingBottom: "1rem",
-        }}
-      >
-        <NavLink to="/" style={style}>
-          Home
-        </NavLink>
-        <NavLink to="/scholarship" style={style}>
-          Scholarship
-        </NavLink>
-      </nav>
-
-      <main style={{ padding: "1rem 0" }}>
-        <Outlet />
-      </main>
+      <div className="container px-4">
+        <div className="row gx-5">
+          <div className="col bg-secondary-subtle text-center">
+            <nav className="nav flex-column p-3">
+              <NavLink to="/" className={"nav-link"} style={style}>
+                Home
+              </NavLink>
+              <NavLink to="/scholarship" className={"nav-link"} style={style}>
+                Scholarship
+              </NavLink>
+            </nav>
+          </div>
+          <div className="col-8">
+            <main className="p-3">
+              <Outlet />
+            </main>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

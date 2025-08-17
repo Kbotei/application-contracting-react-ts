@@ -4,92 +4,88 @@ import { validators } from "../../utils/validation";
 function ApplicantContactInfo() {
   return (
     <>
-      <fieldset className="fieldset">
-        <legend className="fieldset-legend">Applicant</legend>
+      <fieldset>
+        <legend>Applicant</legend>
 
-        <label className="floating-label py-2">
+        <div className="mb-3">
+          <label className="form-label">First Name</label>
           <input
             type="text"
             placeholder="First Name"
-            className="input input-lg"
+            className="form-control"
             required
           />
-          <span>First Name</span>
-        </label>
-
-        <label className="floating-label py-2">
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Last Name</label>
           <input
             type="text"
             placeholder="Last Name"
-            className="input input-lg"
+            className="form-control"
             required
           />
-          <span>Last Name</span>
-        </label>
+        </div>
       </fieldset>
       <fieldset className="fieldset">
-        <legend className="fieldset-legend">Contact Information</legend>
-        <label className="floating-label py-2">
+        <legend>Contact Information</legend>
+        <div className="mb-3">
+          <label className="form-label">Email</label>
           <input
             type="email"
             inputMode="email"
             placeholder="Email"
-            className="input input-lg"
+            className="form-control"
             required
           />
-          <span>Email</span>
-        </label>
-
-        <label className="floating-label py-2">
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Phone</label>
           <input
             type="tel"
             inputMode="tel"
             placeholder="Phone"
-            className="input input-lg"
+            className="form-control"
             required
             onChange={(e) => validators.validPhoneNumber(e.target.value)}
           />
-          <span>Phone</span>
-        </label>
+        </div>
       </fieldset>
       <fieldset className="fieldset">
-        <legend className="fieldset-legend">Address</legend>
-        <label className="floating-label py-2">
+        <legend>Address</legend>
+        <div className="mb-3">
+          <label className="form-label">Street Address</label>
           <input
             type="text"
             placeholder="Street Address"
-            className="input input-lg"
+            className="form-control"
             required
           />
-          <span>Street Address</span>
-        </label>
-
-        <label className="floating-label py-2">
+        </div>
+        <div className="mb-3">
+          <label className="form-label">City</label>
           <input
             type="text"
             placeholder="City"
-            className="input input-lg"
+            className="form-control"
             required
           />
-          <span>City</span>
-        </label>
-
-        <label className="label py-2">
+        </div>
+        <div className="mb-3">
+          <label className="form-label">State</label>
           <StateDropdown isRequired={true} />
-        </label>
-
-        <label className="floating-label py-2">
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Zip Code</label>
           <input
             type="text"
             inputMode="numeric"
             placeholder="Zip Code"
-            className="input input-lg"
+            className="form-control"
             required
             minLength={5}
             maxLength={5}
           />
-          <span>Zip Code</span>
-        </label>
+        </div>
       </fieldset>
     </>
   );

@@ -15,10 +15,10 @@ function StateDropDown({ isRequired }: { isRequired: boolean }) {
       <select
         value={selectedState}
         onChange={(e) => setSelectedState(e.target.value)}
-        className="select select-lg"
+        className="form-select"
         required={isRequired}
       >
-        <option value="">State</option>
+        <option value=""></option>
 
         {states.map((state) => (
           <option key={state.value} value={state.value}>
