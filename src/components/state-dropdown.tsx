@@ -12,7 +12,11 @@ function StateDropDown({ isRequired }: { isRequired: boolean }) {
 
   return (
     <>
+      <label className="form-label" htmlFor="state">
+        State
+      </label>
       <select
+        id="state"
         value={selectedState}
         onChange={(e) => setSelectedState(e.target.value)}
         className="form-select"

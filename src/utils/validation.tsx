@@ -1,5 +1,22 @@
 // Exercise in validation.
+import { createContext } from "react";
+
 type ValidatorFunction = (value: string | null) => string;
+
+export interface ValidationError {
+  id: string;
+  message: string;
+}
+
+export class Validation {
+  errors: ValidationError[] = [];
+
+  findFirst(id: string): string {
+    return this.errors.find((e) => e.id == id)?.message ?? "";
+  }
+}
+
+export const ValidationContext = createContext(new Validation());
 
 export const validators = {
   validPhoneNumber: (value: string | null): string => {
