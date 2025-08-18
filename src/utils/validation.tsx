@@ -1,7 +1,7 @@
 // Exercise in validation.
 import { createContext } from "react";
 
-type ValidatorFunction = (value: string | null) => string;
+export type ValidatorFunction = (value: string | null) => string | null;
 
 export interface ValidationError {
   id: string;
@@ -19,6 +19,14 @@ export class Validation {
 export const ValidationContext = createContext(new Validation());
 
 export const validators = {
+  required: (value: string | null): string | null => {
+    if (value == null || value.trim().length == 0) {
+      return "Required.";
+    }
+
+    return null;
+  },
+
   validPhoneNumber: (value: string | null): string => {
     console.log(`Value: ${value}`);
     if (value == null) {
@@ -32,15 +40,12 @@ export const validators = {
   },
 };
 
-export const validate = (
-  value: string | null,
-  rules: [ValidationRule]
-): string[] => {
-  return rules.map((rule) => {
-    return rule.validator(value);
-  });
+export const validate = (value: string | null, rules: ValidatorFunction[]) => {
+  return rules
+    .map((rule) => {
+      return rule(value);
+    })
+    .filter((result) => {
+      return result !== null;
+    });
 };
-
-interface ValidationRule {
-  validator: ValidatorFunction;
-}
