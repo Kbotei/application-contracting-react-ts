@@ -11,8 +11,10 @@ export interface ValidationError {
 export class Validation {
   errors: ValidationError[] = [];
 
-  findFirst(id: string): string {
-    return this.errors.find((e) => e.id == id)?.message ?? "";
+  removeErrors(id: string) {
+    this.errors = this.errors.filter((error) => {
+      return error.id != id;
+    });
   }
 }
 
@@ -27,7 +29,7 @@ export const validators = {
     return null;
   },
 
-  validPhoneNumber: (value: string | null): string => {
+  validPhoneNumber: (value: string | null): string | null => {
     console.log(`Value: ${value}`);
     if (value == null) {
       return "Required.";
@@ -36,7 +38,7 @@ export const validators = {
     const digitsOnly = value.replace(/\D/g, "");
     const isValid = /^[2-9]\d{2}[2-9]\d{2}\d{4}$/.test(digitsOnly);
 
-    return isValid ? "" : "Invalid phone number.";
+    return isValid ? null : "Invalid phone number.";
   },
 };
 

@@ -7,40 +7,52 @@ function ApplicantContactInfo() {
     <>
       <fieldset>
         <legend>Applicant</legend>
-
-        <InputField
-          settings={{
-            id: "firstName",
-            label: "First Name",
-            validationRules: [validators.required],
-          }}
-        />
-
-        <InputField
-          settings={{
-            id: "lastName",
-            label: "Last Name",
-            validationRules: [validators.required],
-          }}
-        />
+        <div className="row g-3">
+          <div className="col-sm-6">
+            <InputField
+              settings={{
+                id: "firstName",
+                label: "First Name",
+                validationRules: [validators.required],
+              }}
+            />
+          </div>
+          <div className="col-sm-6">
+            <InputField
+              settings={{
+                id: "lastName",
+                label: "Last Name",
+                validationRules: [validators.required],
+              }}
+            />
+          </div>
+        </div>
       </fieldset>
       <fieldset className="fieldset">
         <legend>Contact Information</legend>
-        <InputField
-          settings={{
-            id: "email",
-            label: "Email",
-            validationRules: [validators.required],
-          }}
-        />
-
-        <InputField
-          settings={{
-            id: "phone",
-            label: "Phone",
-            validationRules: [validators.required, validators.validPhoneNumber],
-          }}
-        />
+        <div className="row g-3">
+          <div className="col-sm-6">
+            <InputField
+              settings={{
+                id: "email",
+                label: "Email",
+                validationRules: [validators.required],
+              }}
+            />
+          </div>
+          <div className="col-sm-6">
+            <InputField
+              settings={{
+                id: "phone",
+                label: "Phone",
+                validationRules: [
+                  validators.required,
+                  validators.validPhoneNumber,
+                ],
+              }}
+            />
+          </div>
+        </div>
       </fieldset>
       <fieldset className="fieldset">
         <legend>Address</legend>
@@ -52,25 +64,31 @@ function ApplicantContactInfo() {
           }}
         />
 
-        <InputField
-          settings={{
-            id: "city",
-            label: "City",
-            validationRules: [validators.required],
-          }}
-        />
-
-        <div className="mb-3">
-          <StateDropdown isRequired={true} />
+        <div className="row g-3">
+          <div className="col-sm-7">
+            <InputField
+              settings={{
+                id: "city",
+                label: "City",
+                validationRules: [validators.required],
+              }}
+            />
+          </div>
+          <div className="col-sm">
+            <div className="mb-3">
+              <StateDropdown isRequired={true} />
+            </div>
+          </div>
+          <div className="col-sm">
+            <InputField
+              settings={{
+                id: "zipCode",
+                label: "Zip Code",
+                validationRules: [validators.required],
+              }}
+            />
+          </div>
         </div>
-
-        <InputField
-          settings={{
-            id: "zipCode",
-            label: "Zip Code",
-            validationRules: [validators.required],
-          }}
-        />
       </fieldset>
     </>
   );

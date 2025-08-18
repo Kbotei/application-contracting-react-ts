@@ -17,6 +17,7 @@ function StateDropDown({ isRequired }: { isRequired: boolean }) {
       </label>
       <select
         id="state"
+        name="state"
         value={selectedState}
         onChange={(e) => setSelectedState(e.target.value)}
         className="form-select"

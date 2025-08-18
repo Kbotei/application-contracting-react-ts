@@ -1,12 +1,17 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import {
   validate,
   ValidationContext,
+  type ValidationError,
   type ValidatorFunction,
 } from "../utils/validation";
 
 function InputField({ settings }: { settings: FieldSettings }) {
   const validation = useContext(ValidationContext);
+
+  const [validationErrors, setValidationErrors] = useState<ValidationError[]>(
+    []
+  );
 
   return (
     <>
@@ -16,28 +21,36 @@ function InputField({ settings }: { settings: FieldSettings }) {
         </label>
         <input
           id={settings.id}
+          name={settings.id}
           type="text"
           placeholder={settings.placeholder}
           className={
-            "form-control " +
-            (validation.errors.find((e) => e.id == settings.id)?.message ??
-            "" == ""
-              ? ""
-              : "is-invalid")
+            "form-control " + (validationErrors.length == 0 ? "" : "is-invalid")
           }
           onBlur={(e) => {
             // Validation
-            console.log("Blur on " + settings.id);
             const messages = validate(e.target.value, settings.validationRules);
 
-            messages.forEach((error) => {
-              console.log("ErrorMessage: " + error);
-              validation.errors.push({ id: settings.id, message: error });
+            if (messages.length == 0) {
+              setValidationErrors([]);
+              validation.removeErrors(settings.id);
+              return;
+            }
+
+            const errors: ValidationError[] = messages.map((message) => {
+              console.log("ErrorMessage: ", settings.id, message);
+              return {
+                id: settings.id,
+                message: message,
+              };
             });
+
+            setValidationErrors(errors);
+            validation.errors.push(...errors);
           }}
         />
         <div className="invalid-feedback">
-          {validation.errors.find((e) => e.id == settings.id)?.message}
+          {validationErrors.length > 0 && validationErrors[0].message}
         </div>
       </div>
     </>
