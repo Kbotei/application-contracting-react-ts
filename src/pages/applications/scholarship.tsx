@@ -10,11 +10,8 @@ function Scholarship() {
 
   const [step, setStep] = useState<ApplicationStep>("applicant-contact");
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-    const dataObject = Object.fromEntries(formData.entries());
+  function handleSubmit(formData: FormData) {
+    const dataObject = Object.fromEntries(formData);
     console.log("Form Data Object:", dataObject);
 
     if (validation.errors.length > 0) {
@@ -41,7 +38,30 @@ function Scholarship() {
   return (
     <>
       <h1>Scholarship Application</h1>
-      <form onSubmit={handleSubmit}>
+      <ul className="nav nav-tabs">
+        <li className="nav-item">
+          <a
+            className={
+              "nav-link " + (step == "applicant-contact" ? "active" : "")
+            }
+            onClick={() => setStep("applicant-contact")}
+          >
+            Contact
+          </a>
+        </li>
+        <li className="nav-item">
+          <a
+            type="button"
+            className={
+              "nav-link " + (step == "applicant-income" ? "active" : "")
+            }
+            onClick={() => setStep("applicant-income")}
+          >
+            Income
+          </a>
+        </li>
+      </ul>
+      <form action={handleSubmit}>
         <ApplicationContent />
         <button type="submit" className="btn btn-primary py-2">
           Next

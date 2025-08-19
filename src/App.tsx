@@ -25,9 +25,8 @@ const App = () => {
 export default App;
 
 const Layout = () => {
-  const style = ({ isActive }: NavLinkRenderProps) => ({
-    fontWeight: isActive ? "bold" : "normal",
-  });
+  const navClasses = ({ isActive }: NavLinkRenderProps) =>
+    "nav-link" + (isActive ? " active" : "");
 
   return (
     <>
@@ -56,16 +55,12 @@ const Layout = () => {
                 >
                   <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                      <NavLink to="/" className={"nav-link"} style={style}>
+                      <NavLink to="/" className={navClasses}>
                         Home
                       </NavLink>
                     </li>
                     <li className="nav-item">
-                      <NavLink
-                        to="/scholarship"
-                        className={"nav-link"}
-                        style={style}
-                      >
+                      <NavLink to="/scholarship" className={navClasses}>
                         Scholarship
                       </NavLink>
                     </li>

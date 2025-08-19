@@ -52,6 +52,8 @@ function ApplicantIncome() {
             validationRules: [validators.required],
           }}
         />
+
+        <p>Additional fields here.</p>
       </fieldset>
     </>
   );
