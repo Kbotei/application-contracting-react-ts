@@ -10,7 +10,10 @@ function Scholarship() {
 
   const [step, setStep] = useState<ApplicationStep>("applicant-contact");
 
+  const scholarshipFormData = new FormData();
+
   function handleSubmit(formData: FormData) {
+    scholarshipFormData.appendForm(formData);
     const dataObject = Object.fromEntries(formData);
     console.log("Form Data Object:", dataObject);
 
