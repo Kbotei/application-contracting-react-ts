@@ -3,6 +3,7 @@ import ApplicantContactInfo from "../../features/applications/applicant-contact-
 import { ValidationContext } from "../../utils/validation";
 import ApplicantIncome from "../../features/applications/applicant-income";
 import LegalDisclosures from "../../features/applications/legal-disclosures";
+import { combineFormData } from "../../utils/forms";
 
 function Scholarship() {
   const validation = useContext(ValidationContext);
@@ -14,10 +15,10 @@ function Scholarship() {
 
   const [step, setStep] = useState<ApplicationStep>("applicant-contact");
 
-  const scholarshipFormData = new FormData();
+  let scholarshipFormData = new FormData();
 
   function handleSubmit(formData: FormData) {
-    scholarshipFormData.appendForm(formData);
+    scholarshipFormData = combineFormData([scholarshipFormData, formData]);
     const dataObject = Object.fromEntries(formData);
     console.log("Form Data Object:", dataObject);
 
@@ -36,6 +37,32 @@ function Scholarship() {
       case "applicant-income":
         setStep("legal-disclosures");
         break;
+      case "legal-disclosures":
+        postToAPI();
+        break;
+    }
+  }
+
+  async function postToAPI() {
+    try {
+      const response = await fetch("https://localhost:7195/api/Application", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(scholarshipFormData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Success:", data);
+      // Handle successful post, e.g., clear form, show success message
+    } catch (error) {
+      console.error("Error posting data:", error);
+      // Handle error, e.g., show error message to user
     }
   }
 

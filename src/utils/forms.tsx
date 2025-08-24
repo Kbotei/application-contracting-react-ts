@@ -9,19 +9,3 @@ export function combineFormData(forms: FormData[]): FormData {
 
   return combinedFormData;
 }
-
-export {};
-
-declare global {
-  interface FormData {
-    appendForm(form: FormData): FormData;
-  }
-}
-
-FormData.prototype.appendForm = function (form: FormData): FormData {
-  for (const [key, value] of form.entries()) {
-    this.append(key, value);
-  }
-
-  return this;
-};
